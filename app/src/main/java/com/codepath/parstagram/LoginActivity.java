@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,10 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        btnSignUp = findViewById(R.id.btnSignUp);
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
-            // do stuff with the persisted user
+            // persisted user
             goMainActivity();
         } else {
             // allow login
@@ -46,10 +48,17 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
 
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loginUser(String username, String password) {
-        Log.i(TAG, "attempting to login: " + username + password);
+        Log.i(TAG, "attempting to login: " + username);
         // navigate to main activity if username and password are correct
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override

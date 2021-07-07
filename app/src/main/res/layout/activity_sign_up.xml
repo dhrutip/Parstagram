@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:layout_margin="16dp"
+tools:context=".SignUpActivity">
+
+<EditText
+    android:id="@+id/etNewUsername"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:ems="10"
+    android:hint="username" />
+
+<EditText
+    android:id="@+id/etPasswordOne"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_below="@id/etNewUsername"
+    android:ems="10"
+    android:hint="password"
+    android:inputType="textPassword" />
+
+<EditText
+    android:id="@+id/etPasswordTwo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_below="@id/etPasswordOne"
+    android:ems="10"
+    android:hint="re-enter password"
+    android:inputType="textPassword" />
+
+<Button
+    android:id="@+id/btnCreateAccount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_below="@id/etPasswordTwo"
+    android:text="Sign Up" />
+
+</RelativeLayout>
