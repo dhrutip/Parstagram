@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private Button btnFeed;
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnFeed = findViewById(R.id.btnFeed);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, photoFile);
+            }
+        });
+
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, FeedActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }
