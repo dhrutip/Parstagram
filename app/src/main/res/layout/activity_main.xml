@@ -4,13 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvRandom"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etDescription"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_centerInParent="true"/>
+        android:layout_width="wrap_content"
+        android:ems="10"
+        android:hint="caption..."/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCaptureImage"
+        android:layout_below="@id/etDescription"
+        android:text="take a picture!" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/ivPostImage"
+        android:layout_below="@id/btnCaptureImage"
+        tools:srcCompat="@tools:sample/avatars"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSubmit"
+        android:text="submit"
+        android:layout_below="@id/ivPostImage"/>
 
 </RelativeLayout>
