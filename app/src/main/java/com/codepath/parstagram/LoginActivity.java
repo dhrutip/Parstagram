@@ -29,15 +29,23 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick login button");
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                loginUser(username, password);
-            }
-        });
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the persisted user
+            goMainActivity();
+        } else {
+            // allow login
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(TAG, "onClick login button");
+                    String username = etUsername.getText().toString();
+                    String password = etPassword.getText().toString();
+                    loginUser(username, password);
+                }
+            });
+        }
+
     }
 
     private void loginUser(String username, String password) {
