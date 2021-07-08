@@ -1,8 +1,10 @@
 package com.codepath.parstagram;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.codepath.parstagram.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -28,6 +31,8 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.List;
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnFeed;
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ivPostImage = binding.ivPostImage;
         btnSubmit = binding.btnSubmit;
         btnFeed = binding.btnFeed;
+        bottomNavigationView = binding.bottomNavigation;
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +95,27 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, FeedActivity.class);
                 startActivity(i);
                 finish();
+            }
+        });
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                // item is either home, compose, or profile
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Toast.makeText(MainActivity.this, "home navigation clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_compose:
+                        Toast.makeText(MainActivity.this, "compose navigation clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_profile:
+                    default:
+                        Toast.makeText(MainActivity.this, "profile navigation clicked", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
             }
         });
     }
