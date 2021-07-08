@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.codepath.parstagram.databinding.ActivityMainBinding;
 import com.parse.FindCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -46,13 +47,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        etDescription = findViewById(R.id.etDescription);
-        btnCaptureImage = findViewById(R.id.btnCaptureImage);
-        ivPostImage = findViewById(R.id.ivPostImage);
-        btnSubmit = findViewById(R.id.btnSubmit);
-        btnFeed = findViewById(R.id.btnFeed);
+        etDescription = binding.etDescription;
+        btnCaptureImage = binding.btnCaptureImage;
+        ivPostImage = binding.ivPostImage;
+        btnSubmit = binding.btnSubmit;
+        btnFeed = binding.btnFeed;
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
