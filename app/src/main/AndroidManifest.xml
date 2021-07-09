@@ -19,9 +19,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Parstagram">
+        android:theme="@style/Theme.Parstagram"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".DetailsActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

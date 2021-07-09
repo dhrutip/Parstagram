@@ -1,5 +1,6 @@
 package com.codepath.parstagram.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,12 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codepath.parstagram.DetailsActivity;
 import com.codepath.parstagram.Post;
 import com.codepath.parstagram.PostsAdapter;
 import com.codepath.parstagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +30,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class PostsFragment extends Fragment {
+public class PostsFragment extends Fragment  implements PostsAdapter.OnPostListener {
 
     public static final String TAG = "PostsFragment";
     protected PostsAdapter adapter;
@@ -51,16 +55,11 @@ public class PostsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvPosts);
-        // initialize the array that will hold posts and create a PostsAdapter
         allPosts = new ArrayList<>();
-        adapter = new PostsAdapter(getContext(), allPosts);
-
-        // set the adapter on the recycler view
+        adapter = new PostsAdapter(getContext(), allPosts, this);
         rvPosts.setAdapter(adapter);
-        // set the layout manager on the recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Lookup the swipe container view
         swipeContainer = view.findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -81,19 +80,13 @@ public class PostsFragment extends Fragment {
     }
 
     protected void queryPosts() {
-        // specify what type of data we want to query - Post.class
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        // include data referred by user key
         query.include(Post.KEY_USER);
-        // limit query to latest 20 items
         query.setLimit(20);
-        // order posts by creation date (newest first)
         query.addDescendingOrder(Post.KEY_CREATED_AT);
-        // start an asynchronous call for posts
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
-                // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
@@ -102,11 +95,17 @@ public class PostsFragment extends Fragment {
                 for (Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
-
-                // save received posts to list and notify adapter of new data
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onPostClicked(int position) {
+        Post clickedPost = allPosts.get(position);
+        Intent intent = new Intent(getContext(), DetailsActivity.class);
+        intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(clickedPost));
+        startActivity(intent);
     }
 }
