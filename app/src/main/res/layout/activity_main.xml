@@ -4,44 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     tools:context=".MainActivity">
-
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:ems="10"
-        android:hint="caption..."/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnCaptureImage"
-        android:layout_below="@id/etDescription"
-        android:text="take a picture!" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/ivPostImage"
-        android:layout_below="@id/btnCaptureImage"
-        tools:srcCompat="@tools:sample/avatars"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSubmit"
-        android:text="submit"
-        android:layout_below="@id/ivPostImage"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnFeed"
-        android:layout_marginTop="160dp"
-        android:text="go to feed"
-        android:layout_below="@id/btnSubmit"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
