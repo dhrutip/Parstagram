@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.codepath.parstagram.databinding.ActivityDetailsBinding;
+import com.parse.ParseFile;
+
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,6 +29,14 @@ public class DetailsActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(post.getImage().getUrl())
                 .into(binding.ivImage);
+
+        ParseFile profilePic = post.getUser().getParseFile("profileImage");
+        if (profilePic != null) {
+            Glide.with(view.getContext())
+                    .load(profilePic.getUrl())
+                    .circleCrop()
+                    .into(binding.ivProfile);
+        }
 
     }
 
